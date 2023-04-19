@@ -1,6 +1,7 @@
 import pygame as pg
 import os
 
+# create records.txt if necessary
 file_path = "./records.txt"
 if not os.access(file_path, os.F_OK):
     my_file = open("records.txt", 'w')
@@ -34,6 +35,7 @@ game_over_font = pg.font.Font('freesansbold.ttf', GAME_OVER_FONT_SIZE)
 game_over_text = game_over_font.render('GAME OVER', True, RED)
 game_over_tablet = game_over_text.get_rect()
 game_over_tablet.center = (WIDTH // 2, HEIGHT // 2)
+font_style = pg.font.Font('freesansbold.ttf', GAME_FONT_SIZE)
 
 play_or_quit_text = game_over_font.render('Q - QUIT, P - PLAY', True, RED)
 play_or_quit_tablet = play_or_quit_text.get_rect()
@@ -53,7 +55,10 @@ choose_speed_tablet_2.center = (WIDTH // 2, HEIGHT // 3 + GAME_FONT_SIZE + 5)
 choose_speed_tablet_3.center = (WIDTH // 2, HEIGHT // 3 + 2 * (GAME_FONT_SIZE + 5))
 choose_speed_tablet_4.center = (WIDTH // 2, HEIGHT // 3 + 3 * (GAME_FONT_SIZE + 5))
 
-font_style = pg.font.Font('freesansbold.ttf', GAME_FONT_SIZE)
+# initialize display and clock
+DISPLAY_SURFACE = pg.display.set_mode((WIDTH, HEIGHT))
+pg.display.set_caption("Snake")
+FPS_CLOCK = pg.time.Clock()
 
 # define key actions
 KEY_ACTIONS = {
@@ -61,4 +66,8 @@ KEY_ACTIONS = {
     pg.K_RIGHT: (SPEED, 0),
     pg.K_UP: (0, -SPEED),
     pg.K_DOWN: (0, SPEED),
+    pg.K_a: (-SPEED, 0),
+    pg.K_d: (SPEED, 0),
+    pg.K_w: (0, -SPEED),
+    pg.K_s: (0, SPEED),
 }
